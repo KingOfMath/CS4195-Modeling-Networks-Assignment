@@ -46,10 +46,7 @@ cc = np.sum(cc_dict[i] for i in range(1, N)) / N
 # Q 5 : EH,Hmax
 # comment line 585
 # ******
-betweenness = 0
-for i in range(1, N):
-    betweenness_each = g.betweenness(i)
-    betweenness += betweenness_each
+betweenness = np.sum(g.betweenness(i) for i in range(1,N))
 EH = 2 * betweenness / (N * (N - 1))
 
 Hmax = 0
