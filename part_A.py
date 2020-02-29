@@ -53,7 +53,7 @@ for i in range(1, N):
 EH = 2 * betweenness / (N * (N - 1))
 
 Hmax = 0
-for each in nx.shortest_path_length(nxG).items():
+for each in nx.shortest_path_length(nxG):
     for _, v in each[1].items():
         if v > Hmax:
             Hmax = v
