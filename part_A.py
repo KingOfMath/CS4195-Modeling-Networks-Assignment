@@ -32,6 +32,12 @@ ED = []
 VarD = []
 
 # ******
+# Q 2 : plot
+# ******
+
+
+
+# ******
 # Q 3 : pD => -0.29 ???
 # ******
 pD = nx.degree_assortativity_coefficient(nxG)
@@ -40,7 +46,8 @@ pD = nx.degree_assortativity_coefficient(nxG)
 # Q 4 : cc
 # ******
 cc_dict = nx.clustering(nxG)
-cc = np.sum(cc_dict[i] for i in range(1, N)) / N
+iter_cc = (cc_dict[i] for i in range(1, N))
+cc = np.sum(np.fromiter(iter_cc, float)) / N
 
 # ******
 # Q 5 : EH,Hmax
@@ -71,5 +78,3 @@ lap_matrix_eigvals = g.laplacian_matrix_eigvals()
 second_min_lap_eigval = lap_matrix_eigvals[1]
 
 # --------------------------------------------------------
-
-
