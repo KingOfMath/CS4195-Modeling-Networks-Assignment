@@ -4,6 +4,7 @@ import xlsxParser
 import graph_tools as gt
 import numpy as np
 import networkx as nx
+import matplotlib.pyplot as plt
 
 g = gt.Graph(directed=True)
 nxG = nx.Graph()
@@ -34,12 +35,14 @@ VarD = []
 # ******
 # Q 2 : plot
 # ******
-
-
+# nx.draw(nxG, pos=nx.random_layout(nxG), node_color='b', edge_color='r', with_labels=True, font_size=8, node_size=3)
+nx.draw_networkx(nxG,pos=nx.random_layout(nxG),alpha=0.9,width=0.1,font_size=8,node_size=50)
+plt.show()
 
 # ******
 # Q 3 : pD => -0.29 ???
 # ******
+
 pD = nx.degree_assortativity_coefficient(nxG)
 
 # ******
@@ -56,7 +59,7 @@ cc = np.sum(np.fromiter(iter_cc, float)) / N
 betweenness = 0
 for i in range(1, N):
     betweenness_each = g.betweenness(i)
-    betweenness += betweenness_each
+betweenness += betweenness_each
 EH = 2 * betweenness / (N * (N - 1))
 
 Hmax = 0
