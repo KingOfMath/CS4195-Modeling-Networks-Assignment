@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 
 g = gt.Graph(directed=True)
 nxG = nx.Graph()
-timestamps = xlsxParser.parser()
+raws = xlsxParser.parser()
 
 # --------------------------------------------------------
 # this graph works without timestamps
 # deemed as a final network on the last timestamp
-for link in timestamps:
+for link in raws:
     node_in = int(link[0])
     node_out = int(link[1])
     if not g.has_edge(node_in, node_out):
@@ -24,7 +24,7 @@ for link in timestamps:
 # --------------------------------------------------------
 
 # ******
-# Q 1 : N,L,p,ED,VarD
+# Q 1 : N,L,p,ED(?),VarD(?)
 # ******
 N = len(g.vertices())
 L = len(g.edges())
@@ -40,7 +40,7 @@ nx.draw_networkx(nxG,pos=nx.random_layout(nxG),alpha=0.9,width=0.1,font_size=8,n
 plt.show()
 
 # ******
-# Q 3 : pD => -0.29 ???
+# Q 3 : pD => -0.29 (???)
 # ******
 
 pD = nx.degree_assortativity_coefficient(nxG)
@@ -56,10 +56,8 @@ cc = np.sum(np.fromiter(iter_cc, float)) / N
 # Q 5 : EH,Hmax
 # comment line 585
 # ******
-betweenness = 0
-for i in range(1, N):
-    betweenness_each = g.betweenness(i)
-betweenness += betweenness_each
+iter_bn = (g.betweenness(i) for i in range(1,N))
+betweenness = np.sum(np.fromiter(iter_bn, float))
 EH = 2 * betweenness / (N * (N - 1))
 
 Hmax = 0
@@ -69,7 +67,11 @@ for each in nx.shortest_path_length(nxG):
             Hmax = v
 
 # ******
-# Q 7 : max_adj_eigval => 0 ???
+# Q 6 : small_world(?)
+# ******
+
+# ******
+# Q 7 : max_adj_eigval => 0 (???)
 # ******
 adj_matrix_eigvals = g.adjacency_matrix_eigvals()
 max_adj_eigval = adj_matrix_eigvals[-1]
