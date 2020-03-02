@@ -75,10 +75,16 @@ for link in raws:
 #                 R.append(node_in)
 
 # ******
-# Q 11
+# Q 11: C,D,f(?)
 # ******
-
-
+# D = []
+# C = []
+# degree_arr = sorted(nxG.degree,key=lambda item:item[1])[::-1]
+# cluster_arr = sorted(nx.clustering(nxG).items(),key= lambda item:item[1])[::-1]
+# for a in degree_arr:
+#     D.append(a[0])
+# for a in cluster_arr:
+#     C.append(a[0])
 
 # ******
 # Q 12
@@ -87,35 +93,35 @@ for link in raws:
 
 
 # ******
-# Q 13: R_
+# Q 13: R_(?)
 # ******
 
-Infected = []
-R_ = []
-count = 0
-timestamp = 0
-rootNode = at.Node(1, None)
-nodes = [].append(rootNode)
-d = {rootNode.name:0}
-for link in raws:
-    node_in = int(link[0])
-    node_out = int(link[1])
-    currentTime = int(link[2])
-    if currentTime == timestamp + 1:
-        if (node_in == 1) or (node_in in Infected):
-            Infected.append(node_out)
-            cur_node = at.Node(node_out, node_in)
-            # first time infected
-            if cur_node not in nodes:
-                nodes.append(cur_node)
-                d[node_out] = 1
-
-            else:
-                pass
-    else:
-        timestamp += 1
-        if node_in in Infected:
-            d[node_in] += 1
-            Infected.append(node_out)
+# Infected = []
+# R_ = []
+# count = 0
+# timestamp = 0
+# rootNode = at.Node(1, None)
+# nodes = [].append(rootNode)
+# d = {rootNode.name:0}
+# for link in raws:
+#     node_in = int(link[0])
+#     node_out = int(link[1])
+#     currentTime = int(link[2])
+#     if currentTime == timestamp + 1:
+#         if (node_in == 1) or (node_in in Infected):
+#             Infected.append(node_out)
+#             cur_node = at.Node(node_out, node_in)
+#             # first time infected
+#             if cur_node not in nodes:
+#                 nodes.append(cur_node)
+#                 d[cur_node.name] = 1
+#
+#             else:
+#                 pass
+#     else:
+#         timestamp += 1
+#         if node_in in Infected:
+#             d[node_in] += 1
+#             Infected.append(node_out)
 
 
