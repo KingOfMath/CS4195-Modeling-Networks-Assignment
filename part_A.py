@@ -29,14 +29,20 @@ for link in raws:
 N = len(g.vertices())
 L = len(g.edges())
 p = nx.density(nxG)
-ED = []
-VarD = []
+ED = (2*L)/N
+VarD = [] #TODO
 
 # ******
 # Q 2 : plot
 # ******
 # nx.draw(nxG, pos=nx.random_layout(nxG), node_color='b', edge_color='r', with_labels=True, font_size=8, node_size=3)
 nx.draw_networkx(nxG,pos=nx.random_layout(nxG),alpha=0.9,width=0.1,font_size=8,node_size=50)
+plt.show()
+# plot degree distribution
+degrees = [g.degree(n) for n in g.nodes()]
+plt.xscale('log')
+plt.yscale('log')
+plt.scatter(g.nodes(),degrees)
 plt.show()
 
 # ******
