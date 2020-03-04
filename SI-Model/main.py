@@ -6,8 +6,8 @@ import json
 
 ### SI MODEL FROM A DYNETX GRAPH ###
 
-def load_dynetx_from_json(links_files="edges.json"):
-    with open('edges.json') as json_file:
+def load_dynetx_from_json(links_file="mail.json"):
+    with open(links_file) as json_file:
         data = json.load(json_file)
     new_edge_list=[]
     for edges_list in data["edges"]:
