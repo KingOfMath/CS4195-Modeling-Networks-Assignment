@@ -38,13 +38,13 @@ VarD = np.var(degree)
 # ******
 # Q 2 : plot
 # ******
-# nx.draw_networkx(nxG,pos=nx.random_layout(nxG),alpha=0.9,width=0.1,font_size=8,node_size=50)
-# plt.show()
-# # plot degree distribution
-# plt.xscale('log')
-# plt.yscale('log')
-# plt.scatter(nxG.nodes,degree)
-# plt.show()
+nx.draw_networkx(nxG,pos=nx.random_layout(nxG),alpha=0.9,width=0.1,font_size=8,node_size=50)
+plt.show()
+# plot degree distribution
+plt.xscale('log')
+plt.yscale('log')
+plt.scatter(nxG.nodes,degree)
+plt.show()
 
 # ******
 # Q 3 : pD => -0.29
@@ -75,8 +75,8 @@ for each in nx.shortest_path_length(nxG):
 # ******
 # Q 6 : small_world(?)
 # ******
-sigma = nx.sigma(nxG)
-small_world = sigma > 1
+# sigma = nx.sigma(nxG)
+# small_world = sigma > 1
 
 # ******
 # Q 7 : max_adj_eigval => 60.63926551053449+0j
