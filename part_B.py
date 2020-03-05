@@ -26,8 +26,10 @@ for link in raws:
 # Q 9: Eit, Vit(?)
 # ******
 
-# Eit = []
+# Nodes = []
 # Infected = []
+# Eit = []
+# Vit = []
 # count = 0
 # timestamp = 0
 # for link in raws:
@@ -40,56 +42,79 @@ for link in raws:
 #             Infected.append(node_out)
 #     else:
 #         timestamp += 1
+#         Nodes.append(count)
 #         Eit.append(count/timestamp)
 #         if node_in in Infected:
 #             count += 1
 #             Infected.append(node_out)
 
+
 # ******
 # Q 10: R
 # ******
 
-# d = {}
-# for i in range(168):
-#     d[i] = 0
-# Infected = []
-# R = []
-# count = 0
-# timestamp = 0
-# for link in raws:
-#     node_in = int(link[0])
-#     node_out = int(link[1])
-#     currentTime = int(link[2])
-#     if currentTime == timestamp + 1:
-#         if (node_in == 1) or (node_in in Infected):
-#             d[node_in] += 1
-#             Infected.append(node_out)
-#             if d[node_in] > 0.8 * 167 and node_in not in R:
-#                 R.append(node_in)
-#     else:
-#         timestamp += 1
-#         if node_in in Infected:
-#             d[node_in] += 1
-#             Infected.append(node_out)
-#             if d[node_in] > 0.8 * 167 and node_in not in R:
-#                 R.append(node_in)
+d = {}
+for i in range(168):
+    d[i] = 0
+Infected = []
+R = []
+count = 0
+timestamp = 0
+for link in raws:
+    node_in = int(link[0])
+    node_out = int(link[1])
+    currentTime = int(link[2])
+    if currentTime == timestamp + 1:
+        if (node_in == 1) or (node_in in Infected):
+            d[node_in] += 1
+            Infected.append(node_out)
+            if d[node_in] > 0.8 * 167 and node_in not in R:
+                R.append(node_in)
+    else:
+        timestamp += 1
+        if node_in in Infected:
+            d[node_in] += 1
+            Infected.append(node_out)
+            if d[node_in] > 0.8 * 167 and node_in not in R:
+                R.append(node_in)
 
 # ******
-# Q 11: C,D,f(?)
+# Q 11: C,D,rRD,rRC
 # ******
-# D = []
-# C = []
-# degree_arr = sorted(nxG.degree,key=lambda item:item[1])[::-1]
-# cluster_arr = sorted(nx.clustering(nxG).items(),key= lambda item:item[1])[::-1]
-# for a in degree_arr:
-#     D.append(a[0])
-# for a in cluster_arr:
-#     C.append(a[0])
+D = []
+C = []
+degree_arr = sorted(nxG.degree, key=lambda item: item[1])[::-1]
+cluster_arr = sorted(nx.clustering(nxG).items(), key=lambda item: item[1])[::-1]
+for a in degree_arr:
+    D.append(a[0])
+for a in cluster_arr:
+    C.append(a[0])
+
+rRD = []
+rRC = []
+all_f = np.linspace(0.05, 0.5, 10)
+for f in all_f:
+    fN = int(f * 167)
+    RD = []
+    RC = []
+    for node in R[:fN]:
+        if node in D[:fN]:
+            RD.append(node)
+        if node in C[:fN]:
+            RC.append(node)
+    rRD.append(len(RD) / fN)
+    rRC.append(len(RC) / fN)
+
+plt.figure()
+plt.subplot(121)
+plt.plot(all_f, rRD)
+plt.subplot(122)
+plt.plot(all_f, rRC)
+plt.show()
 
 # ******
 # Q 12
 # ******
-
 
 
 # ******
@@ -123,5 +148,3 @@ for link in raws:
 #         if node_in in Infected:
 #             d[node_in] += 1
 #             Infected.append(node_out)
-
-
