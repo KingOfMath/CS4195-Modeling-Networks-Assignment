@@ -213,10 +213,6 @@ for i,j in sorted(temp,key=lambda item:item[1])[::-1]:
 #             if d[node_in][0] > limit and avg_time[node_in] == 0:
 #                 avg_time[node_in] = d[node_in][1] / limit
 #
-#
-
-
-#
 # R_ = []
 # avg_time = {k: int(v) for k, v in avg_time.items() if v != 0}
 # for i, j in sorted(dict2list(avg_time), key=lambda item: item[1]):
