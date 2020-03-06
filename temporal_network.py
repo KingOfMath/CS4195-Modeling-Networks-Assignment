@@ -6,7 +6,7 @@ import random as rnd
 
 class TemporalNetwork:
 
-    def __init__(self, file_name, rand=False):
+    def __init__(self, file_name="", rand=False):
         self.file_name = file_name
         print("[GRAPH INIT] Read xlsx file...")
         self.raws = self.read_xlsx(rand)
@@ -16,10 +16,10 @@ class TemporalNetwork:
         self.edges = self.get_edges_list()
         print("[GRAPH INIT] Generate timestamps list...")
         self.timestamps = self.get_timestamp_list()
-        print("[GRAPH INIT] Get max timestamp...")
-        self.max_timestamp = self.get_max_timestamp()
-        print("[GRAPH INIT] Generate temporal edges...")
-        self.temporal_edges = self.temporal_edges_list()
+        #print("[GRAPH INIT] Get max timestamp...")
+        #self.max_timestamp = self.get_max_timestamp()
+        #print("[GRAPH INIT] Generate temporal edges...")
+        #self.temporal_edges = self.temporal_edges_list()
         print("*** TEMPORAL NETWORK INITIALIZED ***")
         print()
 
@@ -98,8 +98,22 @@ class TemporalNetwork:
         with open('temporal_graph.taco', 'w') as outfile:
             json.dump(graph, outfile)
 
-    def parser_to_dyNetX(self):
+    def parser_to_dyNetX(self, file_name):
         graph = {}
         graph["edges"] = self.temporal_edges
-        with open('edges.json', 'w') as outfile:
+        with open(file_name, 'w') as outfile:
             json.dump(graph, outfile)
+    
+    def load_temporal_from_json(links_files="edges.json"):
+        with open(links_files) as json_file:
+            data = json.load(json_file)
+        new_edge_list=[]
+        for edges_list in data["edges"]:
+            edges=[]
+            for edge in edges_list:
+                edges.append(edge)
+            new_edge_list.append(edges)
+        g = dn.DynGraph(edge_removal=True)
+        for i, links in enumerate(new_edge_list):
+            g.add_interactions_from(links, t=i)
+        return g
