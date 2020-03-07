@@ -127,7 +127,6 @@ class TemporalNetwork:
     def save_network_to_json(self, file_name="graph.json"):
         graph = {}
         graph["edges"] = self.temporal_edges
-        print(type(graph))
         with open(file_name, 'w') as outfile:
             json.dump(graph, outfile)
 
